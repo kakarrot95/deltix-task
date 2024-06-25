@@ -171,7 +171,7 @@ OutputData process(const std::vector<UserData> &user_data)
 }
 
 /* Makes the output .csv files
-*/
+ */
 void write_output_files(const OutputData &output_data)
 {
     for (const auto &[bar_name, user_data] : output_data)
