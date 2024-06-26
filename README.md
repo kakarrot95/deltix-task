@@ -9,18 +9,8 @@ To run this project, follow these steps:
 
 ### Building and Running
 
-#### Linux Users
-
-1. Run the command `./make` to build the project.
+1. Run the command `make` to build the project.
 2. Run the command `./main` to execute the program.
-
-#### Windows Users
-
-1. Run the command `g++ -Wall -Wextra -std=c++17 -c main.cpp -o main.o` to compile the `main.cpp` file.
-2. Run the command `g++ main.o -o main` to link the object file.
-3. Run the command `./main` to execute the program.
-
-**Note:** Unfortunately, I do not have experience with macOS, so I cannot provide instructions for that platform.
 
 ### Output
 
