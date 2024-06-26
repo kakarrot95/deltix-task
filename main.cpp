@@ -117,15 +117,15 @@ OutputData process(const std::vector<UserData> &user_data)
 {
     OutputData output_data;
 
-    std::unordered_map<std::string, std::unordered_map<std::string, long double>> balances;
     /* balances[id][X] = amount of currency, X
     ** that the user with user_id = id , has till now .
     */
+    std::unordered_map<std::string, std::unordered_map<std::string, long double>> balances;
 
-    std::unordered_map<std::string, long double> balances_usd;
     /* balances_usd[id] = total amount of USD
     ** that the user with user_id = id , has till now .
     */
+    std::unordered_map<std::string, long double> balances_usd;
 
     for (const auto &row : user_data)
     {
@@ -138,22 +138,18 @@ OutputData process(const std::vector<UserData> &user_data)
         long double old_balance;
         long double new_balance;
 
-        {
-            old_balance = balances[user_id][currency];
-            new_balance = old_balance + delta;
-            balances[user_id][currency] = new_balance;
-            /*  updating the ammount of currency
-            **  that the user with user_id has.
-            */
-        }
+        /*  updating the ammount of currency
+        **  that the user with user_id has.
+        */
+        old_balance = balances[user_id][currency];
+        new_balance = old_balance + delta;
+        balances[user_id][currency] = new_balance;
 
         // Update USD balance
         long double old_balance_usd = (currency != "USD") ? old_balance * get_price(currency + "USD", timestamp) : old_balance;
         long double new_balance_usd = (currency != "USD") ? new_balance * get_price(currency + "USD", timestamp) : new_balance;
 
-        {
-            balances_usd[user_id] += (new_balance_usd - old_balance_usd);
-        }
+        balances_usd[user_id] += (new_balance_usd - old_balance_usd);
 
         for (const auto &[bar_name, bar_length] : bars)
         {
